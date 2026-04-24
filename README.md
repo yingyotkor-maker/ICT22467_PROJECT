@@ -173,7 +173,7 @@ This is my ICT22467_PROJECT.
 
 ## Admin
 
- text
+```text
 Username: admin
 Password: admin123
 
