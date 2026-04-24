@@ -173,19 +173,20 @@ This is my ICT22467_PROJECT.
 
 ## Admin
 
-```### text
+```
 Username: admin
 Password: admin123
 ```
+## Staff
 
-```### Staff
+```
 Username: pharmacy
 Password: pharmacy123
 ```
 
 ---
 
-###⚙️ ขั้นตอนการติดตั้งระบบ (Installation Guide)
+### ⚙️ ขั้นตอนการติดตั้งระบบ (Installation Guide)
 
 แนะนำให้ใช้งานผ่าน Microsoft SQL Server
 
@@ -197,20 +198,25 @@ Password: pharmacy123
 
 ---
 
-``` ## Step 1 : สร้างฐานข้อมูล
+### Step 1 : สร้างฐานข้อมูล
+```
 CREATE DATABASE PharmacyTempControl;
 GO
+
 ```
+
 ---
 
-```## Step 2 : เลือกใช้งานฐานข้อมูล
+###  Step 2 : เลือกใช้งานฐานข้อมูล
+```
 USE PharmacyTempControl;
 GO
 ```
 ---
 
-```## Step 3 : CREATE TABLE
-### Medicine
+###  Step 3 : CREATE TABLE
+```
+ Medicine
 CREATE TABLE Medicine (
     MDC_ID VARCHAR(5) PRIMARY KEY,
     MDC_Name VARCHAR(50) NOT NULL UNIQUE,
@@ -219,14 +225,14 @@ CREATE TABLE Medicine (
     MDC_Exd DATE NOT NULL,
     MDC_Total INT NOT NULL
 );
-Cabinet_temp
+ Cabinet_temp
 CREATE TABLE Cabinet_temp (
     C_ID INT PRIMARY KEY,
     TEMP_cap DECIMAL(4,2) NOT NULL,
     MDC_ID VARCHAR(5) NOT NULL UNIQUE,
     FOREIGN KEY (MDC_ID) REFERENCES Medicine(MDC_ID)
 );
-Company
+ Company
 CREATE TABLE Company (
     CPN_ID VARCHAR(10) PRIMARY KEY,
     CPN_Name VARCHAR(100) NOT NULL UNIQUE,
@@ -237,20 +243,20 @@ CREATE TABLE Company (
     MDC_Total INT NOT NULL,
     FOREIGN KEY (MDC_ID) REFERENCES Medicine(MDC_ID)
 );
-Pharmacy
+ Pharmacy
 CREATE TABLE Pharmacy (
     PMC_ID VARCHAR(10) PRIMARY KEY,
     PMC_Name VARCHAR(50) NOT NULL,
     PMC_NO VARCHAR(15) NOT NULL UNIQUE
 );
-Medicine_order
+ Medicine_order
 CREATE TABLE Medicine_order (
     Order_ID VARCHAR(10) NOT NULL UNIQUE,
     MDC_ID VARCHAR(5) NOT NULL UNIQUE,
     M_qty INT NOT NULL,
     FOREIGN KEY (MDC_ID) REFERENCES Medicine(MDC_ID)
 );
-Customer
+ Customer
 CREATE TABLE Customer (
     Cus_Name VARCHAR(50) NOT NULL,
     Cus_NO VARCHAR(15) NOT NULL UNIQUE
@@ -258,8 +264,9 @@ CREATE TABLE Customer (
 ```
 ---
 
-```## Step 4 : SQL VIEW
-### View แสดงยาในคลัง
+### Step 4 : SQL VIEW
+```
+    View แสดงยาในคลัง
 CREATE VIEW Medicine_Inventory AS
 SELECT
     MDC_ID,
@@ -269,7 +276,7 @@ SELECT
     MDC_Date,
     MDC_Exd
 FROM Medicine;
-### View แสดงข้อมูลตู้ควบคุมอุณหภูมิ
+    View แสดงข้อมูลตู้ควบคุมอุณหภูมิ
 CREATE VIEW Cabinet_Status AS
 SELECT
     C.C_ID,
@@ -279,7 +286,7 @@ SELECT
 FROM Cabinet_temp C
 INNER JOIN Medicine M
 ON C.MDC_ID = M.MDC_ID;
-### View แสดงบริษัทผู้จัดส่งยา
+    View แสดงบริษัทผู้จัดส่งยา
 CREATE VIEW Company_Details AS
 SELECT
     CPN_ID,
@@ -288,7 +295,7 @@ SELECT
     CPN_Address,
     MDC_ID
 FROM Company;
-### View แสดงรายการสั่งซื้อยา
+    View แสดงรายการสั่งซื้อยา
 CREATE VIEW Medicine_Order_Details AS
 SELECT
     O.Order_ID,
@@ -300,8 +307,9 @@ ON O.MDC_ID = M.MDC_ID;
 ```
 ---
 
-```## Step 5 : INSERT SAMPLE DATA
-###Medicine
+### Step 5 : INSERT SAMPLE DATA
+```
+Medicine
 INSERT INTO Medicine
 VALUES
     ('M001','Paracetamol',25.00,'2026-01-10','2027-01-10',100),
@@ -336,7 +344,8 @@ VALUES
 ```
 ---
 
-```## Step 6 : ตรวจสอบผลลัพธ์
+### Step 6 : ตรวจสอบผลลัพธ์
+```
     SELECT * FROM Medicine_Inventory;
     SELECT * FROM Cabinet_Status;
     SELECT * FROM Company_Details;
