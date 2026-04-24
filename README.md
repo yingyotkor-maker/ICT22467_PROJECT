@@ -181,6 +181,8 @@ Staff
 Username: pharmacy
 Password: pharmacy123
 
+---
+
 ###⚙️ ขั้นตอนการติดตั้งระบบ (Installation Guide)
 
 แนะนำให้ใช้งานผ่าน Microsoft SQL Server
