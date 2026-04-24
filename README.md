@@ -1,5 +1,5 @@
 # ICT22467_PROJECT
-This is my ICT22467_PROJECT.
+ICT22467_PROJECT.
 # 💊 Pharmacy Temperature Control System
 
 ระบบควบคุมอุณหภูมิสำหรับการจัดเก็บยาในร้านขายยา (Pharmacy)  
