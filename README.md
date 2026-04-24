@@ -189,7 +189,7 @@ Password: pharmacy123
 
 แนะนำให้ใช้งานผ่าน Microsoft SQL Server
 
-โปรแกรมที่ต้องมี (Prerequisites)
+### โปรแกรมที่ต้องมี (Prerequisites)
 - Microsoft SQL Server
 - SQL Server Management Studio (SSMS)
 - Visual Studio Code (สำหรับจัดการไฟล์ SQL)
@@ -203,14 +203,14 @@ GO
 ```
 ---
 
-```##Step 2 : เลือกใช้งานฐานข้อมูล
+```## Step 2 : เลือกใช้งานฐานข้อมูล
 USE PharmacyTempControl;
 GO
 ```
 ---
 
-```Step 3 : CREATE TABLE
-Medicine
+```## Step 3 : CREATE TABLE
+### Medicine
 CREATE TABLE Medicine (
     MDC_ID VARCHAR(5) PRIMARY KEY,
     MDC_Name VARCHAR(50) NOT NULL UNIQUE,
@@ -258,8 +258,8 @@ CREATE TABLE Customer (
 ```
 ---
 
-```Step 4 : SQL VIEW
-View แสดงยาในคลัง
+```## Step 4 : SQL VIEW
+### View แสดงยาในคลัง
 CREATE VIEW Medicine_Inventory AS
 SELECT
     MDC_ID,
@@ -269,7 +269,7 @@ SELECT
     MDC_Date,
     MDC_Exd
 FROM Medicine;
-View แสดงข้อมูลตู้ควบคุมอุณหภูมิ
+### View แสดงข้อมูลตู้ควบคุมอุณหภูมิ
 CREATE VIEW Cabinet_Status AS
 SELECT
     C.C_ID,
@@ -279,7 +279,7 @@ SELECT
 FROM Cabinet_temp C
 INNER JOIN Medicine M
 ON C.MDC_ID = M.MDC_ID;
-View แสดงบริษัทผู้จัดส่งยา
+### View แสดงบริษัทผู้จัดส่งยา
 CREATE VIEW Company_Details AS
 SELECT
     CPN_ID,
@@ -288,7 +288,7 @@ SELECT
     CPN_Address,
     MDC_ID
 FROM Company;
-View แสดงรายการสั่งซื้อยา
+### View แสดงรายการสั่งซื้อยา
 CREATE VIEW Medicine_Order_Details AS
 SELECT
     O.Order_ID,
@@ -300,51 +300,51 @@ ON O.MDC_ID = M.MDC_ID;
 ```
 ---
 
-```Step 5 : INSERT SAMPLE DATA
-Medicine
+```## Step 5 : INSERT SAMPLE DATA
+###Medicine
 INSERT INTO Medicine
 VALUES
-('M001','Paracetamol',25.00,'2026-01-10','2027-01-10',100),
-('M002','Amoxicillin',18.00,'2026-01-12','2027-02-15',80),
-('M003','Insulin',4.00,'2026-01-15','2026-12-30',50);
+    ('M001','Paracetamol',25.00,'2026-01-10','2027-01-10',100),
+    ('M002','Amoxicillin',18.00,'2026-01-12','2027-02-15',80),
+    ('M003','Insulin',4.00,'2026-01-15','2026-12-30',50);
 Cabinet_temp
 INSERT INTO Cabinet_temp
 VALUES
-(1,25.00,'M001'),
-(2,18.00,'M002'),
-(3,4.00,'M003');
+    (1,25.00,'M001'),
+    (2,18.00,'M002'),
+    (3,4.00,'M003');
 Company
 INSERT INTO Company
 VALUES
-('CP001','Bangkok Pharma','0812345678','Bangkok','M001','2026-01-10',100),
-('CP002','Medical Supply Co.','0898765432','Chiang Mai','M002','2026-01-12',80);
+    ('CP001','Bangkok Pharma','0812345678','Bangkok','M001','2026-01-10',100),
+    ('CP002','Medical Supply Co.','0898765432','Chiang Mai','M002','2026-01-12',80);
 Pharmacy
 INSERT INTO Pharmacy
 VALUES
-('P001','Somchai','0891111111'),
-('P002','Suda','0892222222');
+    ('P001','Somchai','0891111111'),
+    ('P002','Suda','0892222222');
 Medicine_order
 INSERT INTO Medicine_order
 VALUES
-('ORD001','M001',20),
-('ORD002','M002',15);
+    ('ORD001','M001',20),
+    ('ORD002','M002',15);
 Customer
 INSERT INTO Customer
 VALUES
-('Anan','0811111111'),
-('Nida','0822222222');
+    ('Anan','0811111111'),
+    ('Nida','0822222222');
 ```
 ---
 
-```Step 6 : ตรวจสอบผลลัพธ์
-SELECT * FROM Medicine_Inventory;
-SELECT * FROM Cabinet_Status;
-SELECT * FROM Company_Details;
-SELECT * FROM Medicine_Order_Details;
+```## Step 6 : ตรวจสอบผลลัพธ์
+    SELECT * FROM Medicine_Inventory;
+    SELECT * FROM Cabinet_Status;
+    SELECT * FROM Company_Details;
+    SELECT * FROM Medicine_Order_Details;
 ```
 ---
 
-หมายเหตุเพิ่มเติม
+### หมายเหตุเพิ่มเติม
 รองรับการขยายระบบเป็น Smart Medicine Cabinet
 สามารถต่อยอดเชื่อมต่อ IoT และ Sensor ได้
 รองรับการพัฒนาเป็นระบบควบคุมอุณหภูมิแบบ Real-time
