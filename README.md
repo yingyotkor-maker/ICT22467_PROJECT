@@ -178,7 +178,7 @@ Username: admin
 Password: admin123
 ```
 
-```###Staff
+```### Staff
 Username: pharmacy
 Password: pharmacy123
 ```
