@@ -179,5 +179,23 @@ Password: admin123
 
 Staff
 Username: pharmacy
-Password: pharmacy123```
+Password: pharmacy123
+
+###⚙️ ขั้นตอนการติดตั้งระบบ (Installation Guide)
+
+แนะนำให้ใช้งานผ่าน Microsoft SQL Server
+
+โปรแกรมที่ต้องมี (Prerequisites)
+- Microsoft SQL Server
+- SQL Server Management Studio (SSMS)
+- Visual Studio Code (สำหรับจัดการไฟล์ SQL)
+- Database Script ของระบบ
+
+---
+
+## Step 1 : สร้างฐานข้อมูล
+CREATE DATABASE PharmacyTempControl;
+GO
+
+----
 
