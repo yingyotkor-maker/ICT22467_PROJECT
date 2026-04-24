@@ -177,9 +177,11 @@ This is my ICT22467_PROJECT.
 Username: admin
 Password: admin123
 ```
-Staff
+
+```###Staff
 Username: pharmacy
 Password: pharmacy123
+```
 
 ---
 
@@ -195,10 +197,10 @@ Password: pharmacy123
 
 ---
 
-## Step 1 : สร้างฐานข้อมูล
+``` ## Step 1 : สร้างฐานข้อมูล
 CREATE DATABASE PharmacyTempControl;
 GO
-
+```
 ---
 
 ##Step 2 : เลือกใช้งานฐานข้อมูล
