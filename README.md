@@ -203,13 +203,13 @@ GO
 ```
 ---
 
-##Step 2 : เลือกใช้งานฐานข้อมูล
+```##Step 2 : เลือกใช้งานฐานข้อมูล
 USE PharmacyTempControl;
 GO
-
+```
 ---
 
-Step 3 : CREATE TABLE
+```Step 3 : CREATE TABLE
 Medicine
 CREATE TABLE Medicine (
     MDC_ID VARCHAR(5) PRIMARY KEY,
@@ -255,10 +255,10 @@ CREATE TABLE Customer (
     Cus_Name VARCHAR(50) NOT NULL,
     Cus_NO VARCHAR(15) NOT NULL UNIQUE
 );
-
+```
 ---
 
-Step 4 : SQL VIEW
+```Step 4 : SQL VIEW
 View แสดงยาในคลัง
 CREATE VIEW Medicine_Inventory AS
 SELECT
@@ -297,10 +297,10 @@ SELECT
 FROM Medicine_order O
 INNER JOIN Medicine M
 ON O.MDC_ID = M.MDC_ID;
-
+```
 ---
 
-Step 5 : INSERT SAMPLE DATA
+```Step 5 : INSERT SAMPLE DATA
 Medicine
 INSERT INTO Medicine
 VALUES
@@ -333,15 +333,15 @@ INSERT INTO Customer
 VALUES
 ('Anan','0811111111'),
 ('Nida','0822222222');
-
+```
 ---
 
-Step 6 : ตรวจสอบผลลัพธ์
+```Step 6 : ตรวจสอบผลลัพธ์
 SELECT * FROM Medicine_Inventory;
 SELECT * FROM Cabinet_Status;
 SELECT * FROM Company_Details;
 SELECT * FROM Medicine_Order_Details;
-
+```
 ---
 
 หมายเหตุเพิ่มเติม
