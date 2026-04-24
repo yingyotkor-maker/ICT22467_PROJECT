@@ -179,5 +179,5 @@ Password: admin123
 
 Staff
 Username: pharmacy
-Password: pharmacy123
----
+Password: pharmacy123```
+
