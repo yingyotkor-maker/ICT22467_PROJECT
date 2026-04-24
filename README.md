@@ -173,13 +173,13 @@ This is my ICT22467_PROJECT.
 
 ## Admin
 
-```text
+###text
 Username: admin
 Password: admin123
 
 Staff
 Username: pharmacy
-Password: pharmacy123```
+Password: pharmacy123
 
 ---
 
@@ -199,5 +199,152 @@ Password: pharmacy123```
 CREATE DATABASE PharmacyTempControl;
 GO
 
-----
+---
 
+##Step 2 : เลือกใช้งานฐานข้อมูล
+USE PharmacyTempControl;
+GO
+
+---
+
+Step 3 : CREATE TABLE
+Medicine
+CREATE TABLE Medicine (
+    MDC_ID VARCHAR(5) PRIMARY KEY,
+    MDC_Name VARCHAR(50) NOT NULL UNIQUE,
+    TEMP_REQ DECIMAL(4,2) NOT NULL,
+    MDC_Date DATE NOT NULL,
+    MDC_Exd DATE NOT NULL,
+    MDC_Total INT NOT NULL
+);
+Cabinet_temp
+CREATE TABLE Cabinet_temp (
+    C_ID INT PRIMARY KEY,
+    TEMP_cap DECIMAL(4,2) NOT NULL,
+    MDC_ID VARCHAR(5) NOT NULL UNIQUE,
+    FOREIGN KEY (MDC_ID) REFERENCES Medicine(MDC_ID)
+);
+Company
+CREATE TABLE Company (
+    CPN_ID VARCHAR(10) PRIMARY KEY,
+    CPN_Name VARCHAR(100) NOT NULL UNIQUE,
+    CPN_No VARCHAR(100) NOT NULL UNIQUE,
+    CPN_Address VARCHAR(200) NOT NULL,
+    MDC_ID VARCHAR(5) NOT NULL UNIQUE,
+    MDC_Date DATE NOT NULL,
+    MDC_Total INT NOT NULL,
+    FOREIGN KEY (MDC_ID) REFERENCES Medicine(MDC_ID)
+);
+Pharmacy
+CREATE TABLE Pharmacy (
+    PMC_ID VARCHAR(10) PRIMARY KEY,
+    PMC_Name VARCHAR(50) NOT NULL,
+    PMC_NO VARCHAR(15) NOT NULL UNIQUE
+);
+Medicine_order
+CREATE TABLE Medicine_order (
+    Order_ID VARCHAR(10) NOT NULL UNIQUE,
+    MDC_ID VARCHAR(5) NOT NULL UNIQUE,
+    M_qty INT NOT NULL,
+    FOREIGN KEY (MDC_ID) REFERENCES Medicine(MDC_ID)
+);
+Customer
+CREATE TABLE Customer (
+    Cus_Name VARCHAR(50) NOT NULL,
+    Cus_NO VARCHAR(15) NOT NULL UNIQUE
+);
+
+---
+
+Step 4 : SQL VIEW
+View แสดงยาในคลัง
+CREATE VIEW Medicine_Inventory AS
+SELECT
+    MDC_ID,
+    MDC_Name,
+    MDC_Total,
+    TEMP_REQ,
+    MDC_Date,
+    MDC_Exd
+FROM Medicine;
+View แสดงข้อมูลตู้ควบคุมอุณหภูมิ
+CREATE VIEW Cabinet_Status AS
+SELECT
+    C.C_ID,
+    C.TEMP_cap,
+    M.MDC_Name,
+    M.TEMP_REQ
+FROM Cabinet_temp C
+INNER JOIN Medicine M
+ON C.MDC_ID = M.MDC_ID;
+View แสดงบริษัทผู้จัดส่งยา
+CREATE VIEW Company_Details AS
+SELECT
+    CPN_ID,
+    CPN_Name,
+    CPN_No,
+    CPN_Address,
+    MDC_ID
+FROM Company;
+View แสดงรายการสั่งซื้อยา
+CREATE VIEW Medicine_Order_Details AS
+SELECT
+    O.Order_ID,
+    M.MDC_Name,
+    O.M_qty
+FROM Medicine_order O
+INNER JOIN Medicine M
+ON O.MDC_ID = M.MDC_ID;
+
+---
+
+Step 5 : INSERT SAMPLE DATA
+Medicine
+INSERT INTO Medicine
+VALUES
+('M001','Paracetamol',25.00,'2026-01-10','2027-01-10',100),
+('M002','Amoxicillin',18.00,'2026-01-12','2027-02-15',80),
+('M003','Insulin',4.00,'2026-01-15','2026-12-30',50);
+Cabinet_temp
+INSERT INTO Cabinet_temp
+VALUES
+(1,25.00,'M001'),
+(2,18.00,'M002'),
+(3,4.00,'M003');
+Company
+INSERT INTO Company
+VALUES
+('CP001','Bangkok Pharma','0812345678','Bangkok','M001','2026-01-10',100),
+('CP002','Medical Supply Co.','0898765432','Chiang Mai','M002','2026-01-12',80);
+Pharmacy
+INSERT INTO Pharmacy
+VALUES
+('P001','Somchai','0891111111'),
+('P002','Suda','0892222222');
+Medicine_order
+INSERT INTO Medicine_order
+VALUES
+('ORD001','M001',20),
+('ORD002','M002',15);
+Customer
+INSERT INTO Customer
+VALUES
+('Anan','0811111111'),
+('Nida','0822222222');
+
+---
+
+Step 6 : ตรวจสอบผลลัพธ์
+SELECT * FROM Medicine_Inventory;
+SELECT * FROM Cabinet_Status;
+SELECT * FROM Company_Details;
+SELECT * FROM Medicine_Order_Details;
+
+---
+
+หมายเหตุเพิ่มเติม
+รองรับการขยายระบบเป็น Smart Medicine Cabinet
+สามารถต่อยอดเชื่อมต่อ IoT และ Sensor ได้
+รองรับการพัฒนาเป็นระบบควบคุมอุณหภูมิแบบ Real-time
+
+---
